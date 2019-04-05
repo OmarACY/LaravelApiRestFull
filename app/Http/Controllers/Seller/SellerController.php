@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Seller;
 
-use App\User;
+use App\Seller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class SellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Seller $seller)
     {
         //
     }
@@ -43,10 +44,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Seller $seller)
     {
         //
     }
@@ -54,10 +55,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Seller $seller)
     {
         //
     }

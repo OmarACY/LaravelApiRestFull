@@ -17,7 +17,32 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::apiResource('users', 'UserController');
-Route::apiResource('products', 'ProductController');
-Route::apiResource('transactions', 'TransactionController');
-Route::apiResource('categories', 'CategoryController');
+/**
+ * Buyers
+ */
+Route::apiResource('buyers', 'Buyer\BuyerController', ['only' => ['index', 'show']]);
+
+/**
+ * Categories
+ */
+Route::apiResource('categories', 'Category\CategoryController');
+
+/**
+ * Products
+ */
+Route::apiResource('products', 'Product\ProductController', ['only' => ['index', 'show']]);
+
+/**
+ * Transactions
+ */
+Route::apiResource('transactions', 'Transaction\TransactionController', ['only' => ['index', 'show']]);
+
+/**
+ * Sellers
+ */
+Route::apiResource('Sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+
+/**
+ * Users
+ */
+Route::apiResource('users', 'User\UserController');
