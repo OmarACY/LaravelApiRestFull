@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('verified')->default(User::USUARIO_NO_VERIFICADO);
-            $table->string('verified')->nullable();
+            $table->string('verification_token')->nullable();
             $table->string('admin')->default(User::USUARIO_REGULAR);
             $table->timestamps();
         });
