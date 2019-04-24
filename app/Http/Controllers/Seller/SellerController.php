@@ -15,18 +15,9 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $vendedores = Seller::has('products')->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return response()->json(['data' => $vendedores], 200);
     }
 
     /**
@@ -36,29 +27,6 @@ class SellerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Seller $seller)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Seller $seller)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Seller $seller)
     {
         //
     }

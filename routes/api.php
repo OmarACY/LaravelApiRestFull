@@ -40,7 +40,7 @@ Route::apiResource('transactions', 'Transaction\TransactionController', ['only' 
 /**
  * Sellers
  */
-Route::apiResource('Sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+Route::apiResource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
 
 /**
  * Users
