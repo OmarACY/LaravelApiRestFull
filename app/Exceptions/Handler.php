@@ -7,6 +7,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use App\Traits\ApiResponser;
 
 class Handler extends ExceptionHandler
@@ -66,6 +67,10 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $e);
         }
 
+        if($exception instanceof AuthorizationException){
+            return $this->errorResponse("No posee permisos para ejecutar esta acción", 403);
+        }
+
         return parent::render($request, $exception);
     }
 
@@ -93,6 +98,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return response()->json(['message' => $exception->getMessage()], 401);
+        return $this->errorResponse($exception->getMessage(), 401);
     }
 }
