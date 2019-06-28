@@ -91,14 +91,18 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof QueryException){
-            $codigo = $exception->errorInfo[1];
+            $code = $exception->errorInfo[1];
 
-            if($codigo){
+            if($code){
                 return $this->errorResponse("No se puede eliminar de forma permanente el recurso porque está relacionado con algún otro.", 409);
             }
         }
 
-        return parent::render($request, $exception);
+        if(config("app.debug")){
+            return parent::render($request, $exception);
+        }
+
+        return $this->errorResponse("Falla inseperada. Intente luego", 500);
     }
 
     /**
