@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof AuthenticationException){
-            return $this->unauthenticated($request, $e);
+            return $this->unauthenticated($request, $exception);
         }
 
         if($exception instanceof AuthorizationException){
