@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use App\Traits\ApiResponser;
@@ -43,7 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        try {
+            parent::report($exception);
+        } catch (Exception $e) {
+        }
     }
 
     /**
@@ -51,7 +56,7 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
@@ -66,7 +71,7 @@ class Handler extends ExceptionHandler
         }
 
         if($exception instanceof AuthenticationException){
-            return $this->unauthenticated($request, $e);
+            return $this->unauthenticated($request, $exception);
         }
 
         if($exception instanceof AuthorizationException){
@@ -81,7 +86,23 @@ class Handler extends ExceptionHandler
             return $this->errorResponse("El método especificado en la petición no es válido", 405);
         }
 
-        return parent::render($request, $exception);
+        if($exception instanceof HttpException){
+            return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        if($exception instanceof QueryException){
+            $code = $exception->errorInfo[1];
+
+            if($code){
+                return $this->errorResponse("No se puede eliminar de forma permanente el recurso porque está relacionado con algún otro.", 409);
+            }
+        }
+
+        if(config("app.debug")){
+            return parent::render($request, $exception);
+        }
+
+        return $this->errorResponse("Falla inseperada. Intente luego", 500);
     }
 
     /**
