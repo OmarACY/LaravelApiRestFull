@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -44,7 +45,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        try {
+            parent::report($exception);
+        } catch (Exception $e) {
+        }
     }
 
     /**
@@ -84,6 +88,14 @@ class Handler extends ExceptionHandler
 
         if($exception instanceof HttpException){
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        if($exception instanceof QueryException){
+            $codigo = $exception->errorInfo[1];
+
+            if($codigo){
+                return $this->errorResponse("No se puede eliminar de forma permanente el recurso porque está relacionado con algún otro.", 409);
+            }
         }
 
         return parent::render($request, $exception);
