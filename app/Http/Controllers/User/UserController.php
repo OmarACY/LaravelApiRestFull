@@ -55,9 +55,7 @@ class UserController extends ApiController
      */
     public function show(User $user)
     {
-        $usuario = User::findOrFail($user->id);
-
-        return $this->showOne($usuario);
+        return $this->showOne($user);
     }
 
     /**
@@ -69,8 +67,6 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($user->id);
-
         $rules = [
             'email' => 'email|unique:users,email,' . $user->id,
             'password' => 'min:6|confirmed',
@@ -119,8 +115,6 @@ class UserController extends ApiController
      */
     public function destroy(User $user)
     {
-        $user = User::findOrFail($user->id);
-
         $user->delete();
 
         return $this->showOne($user);
