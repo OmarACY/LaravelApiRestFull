@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LaravelApiRestFull.iml" filepath="$PROJECT_DIR$/.idea/LaravelApiRestFull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/laravelApiRestFull.iml" filepath="$PROJECT_DIR$/.idea/laravelApiRestFull.iml" />
     </modules>
   </component>
 </project>
