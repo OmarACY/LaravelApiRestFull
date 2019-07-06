@@ -15,18 +15,9 @@ class CategoryController extends ApiController
      */
     public function index()
     {
-        //
-    }
+        $categories = Category::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return $this->showAll($categories);
     }
 
     /**
@@ -37,19 +28,7 @@ class CategoryController extends ApiController
      */
     public function show(Category $category)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
+        return $this->showOne($category);
     }
 
     /**
