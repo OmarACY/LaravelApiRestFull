@@ -30,6 +30,7 @@ Route::apiResource('buyers.transactions', 'Buyer\BuyerTransactionController', ['
  * Categories
  */
 Route::apiResource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
+Route::apiResource('categories.buyers', 'Category\CategoryBuyerController', ['only' => ['index']]);
 Route::apiResource('categories.transactions', 'Category\CategoryTransactionController', ['only' => ['index']]);
 Route::apiResource('categories.sellers', 'Category\CategorySellerController', ['only' => ['index']]);
 Route::apiResource('categories.products', 'Category\CategoryProductController', ['only' => ['index']]);
