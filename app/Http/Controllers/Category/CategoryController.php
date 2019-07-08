@@ -10,7 +10,8 @@ class CategoryController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('client.credentials')->only(['index']);
+        $this->middleware('client.credentials')->only(['index', 'show']);
+        $this->middleware('auth:api')->except(['index', 'show']);
     }
 
     /**
@@ -28,8 +29,9 @@ class CategoryController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -83,8 +85,9 @@ class CategoryController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param \App\Category $category
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {

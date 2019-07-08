@@ -11,6 +11,7 @@ class UserController extends ApiController
     public function __construct()
     {
         $this->middleware('client.credentials')->only(['store']);
+        $this->middleware('auth:api')->except(['store']);
     }
 
     /**
@@ -28,8 +29,9 @@ class UserController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -66,9 +68,10 @@ class UserController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, User $user)
     {
@@ -115,8 +118,9 @@ class UserController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
