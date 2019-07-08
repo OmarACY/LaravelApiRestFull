@@ -71,3 +71,19 @@ Modify guard driver in **config\auth.php**:
         ],
     ],
 ```
+
+Assign expiration time token **app\Providers\AuthServiceProvider** in **config\auth.php**:
+```php
+class AuthServiceProvider extends ServiceProvider
+{
+    ...
+    
+    public function boot()
+    {
+        ...
+        
+        Passport::tokensExpireIn(Carbon::now()->addMinutes(30));
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(30));
+    }
+}
+```
