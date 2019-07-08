@@ -39,3 +39,24 @@ use HasApiTokens;
 }
 ```
 
+Register require routes in **app\Providers\AuthServiceProvider**:
+```php
+class AuthServiceProvider extends ServiceProvider
+{
+    ...
+    
+    public function boot()
+    {
+        ...
+        
+        Passport::routes();
+    }
+}
+```
+
+And add this line in **routes\api.php**:
+```php
+...
+
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+```
