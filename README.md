@@ -60,3 +60,14 @@ And add this line in **routes\api.php**:
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 ```
+
+Modify guard driver in **config\auth.php**:
+```php
+'guards' => [        
+        ...        
+        'api' => [
+            'driver' => 'passport',
+            ...
+        ],
+    ],
+```
