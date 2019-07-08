@@ -27,3 +27,15 @@ Generate keys for passport:
 ```bash
 php artisan passport:install
 ```
+
+Import **Laravel\Passport\HasApiTokens** in **User** model:
+```php
+use Laravel\Passport\HasApiTokens;
+
+class User extends Authenticatable
+{
+use HasApiTokens;
+...
+}
+```
+
