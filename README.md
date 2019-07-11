@@ -87,3 +87,19 @@ class AuthServiceProvider extends ServiceProvider
     }
 }
 ```
+
+### Install CORS
+Install passport with composer:
+```bash
+composer require barryvdh/laravel-cors
+```
+
+Add next line in **config\app.php** in **Package Service Providers section**:
+```bash
+\Barryvdh\Cors\ServiceProvider::class,
+```
+
+Publich provider
+```bash
+php artisan vendor:publish --provider="Barryvdh\Cors\ServiceProvider"
+```
