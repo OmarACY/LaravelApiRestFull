@@ -55,6 +55,8 @@ Route::apiResource('sellers', 'Seller\SellerController', ['only' => ['index', 's
 /**
  * Users
  */
+Route::name('me')->get('users/me', 'User\UserController@me');
 Route::apiResource('users', 'User\UserController');
+
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
