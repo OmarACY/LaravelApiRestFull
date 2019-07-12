@@ -51,6 +51,7 @@ Route::apiResource('transactions.sellers', 'Transaction\TransactionSellerControl
  * Sellers
  */
 Route::apiResource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+Route::apiResource('sellers.transactions', 'Seller\SellerTransactionController', ['only' => ['index']]);
 
 /**
  * Users
